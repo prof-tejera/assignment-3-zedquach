@@ -1,0 +1,56 @@
+.inputWrapper {
+    position: relative;
+    height: fit-content;
+    width: fit-content;
+    pointer-events: none;
+}
+.input {
+    pointer-events: all;
+    height: 20em;
+    padding-top: 9em;
+    padding-bottom: 9em;
+    width: fit-content;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    overflow-y: scroll;
+    color: white;
+    cursor: pointer;
+    scroll-snap-type: y mandatory;
+}
+
+.input::-webkit-scrollbar {
+    display: none;
+}
+
+.inputText {
+    font-size: 2em;
+    line-height: 2em;
+    height: fit-content;
+    scroll-snap-align: center;
+}
+
+.mask {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 20em;
+    background: rgb(0, 0, 0);
+    background: linear-gradient(
+            0deg,
+            rgba(6, 1, 38, 1) 5%,
+            rgba(255, 255, 255, 0) 45%,
+            rgba(255, 255, 255, 0) 55%,
+            rgba(6, 1, 38, 1) 95%
+    );
+    pointer-events: none;
+}
+
+.marker {
+    transform: translate(0, -50%);
+    position: absolute;
+    top: 10em;
+    left: -1.5em;
+    border-left: 0.75em solid white;
+    border-top: 0.75em solid transparent;
+    border-bottom: 0.75em solid transparent;
+}

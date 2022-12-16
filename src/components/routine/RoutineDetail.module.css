@@ -1,0 +1,29 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: solid white 1px;
+  gap: 20px;
+  flex: 0 0 200px;
+  height: 200px;
+  padding: 10px;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  position: relative;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.closeBtn {
+  position: absolute;
+  right: 5px;
+  top: 0px;
+  padding: 5px;
+  cursor: pointer;
+}

@@ -1,0 +1,9 @@
+.wrapper {
+  display: flex;
+  width: 90vw;
+  overflow-x: scroll;
+  height: 300px;
+  gap: 20px;
+  border: 1px solid white;
+  padding: 30px;
+}

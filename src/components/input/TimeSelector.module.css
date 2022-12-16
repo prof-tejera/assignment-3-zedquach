@@ -1,0 +1,18 @@
+.inputGroup {
+    display: flex;
+    width: fit-content;
+    flex-direction: row;
+    gap: 4rem;
+}
+
+.timeInputWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.timeInputLabel {
+    font-size: 2em;
+    color:white;
+}
