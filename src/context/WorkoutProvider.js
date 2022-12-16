@@ -3,6 +3,8 @@ const WorkoutContext = createContext();
 
 let didInit = false;
 
+const root = document.querySelector(":root");
+
 const WorkoutProvider = ({ children }) => {
   const [timers, setTimers] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -12,6 +14,7 @@ const WorkoutProvider = ({ children }) => {
   const intervalRef = useRef();
   const [currentRound, setCurrentRound] = useState(1);
   const [currentTarget, setCurrentTarget] = useState(0);
+  const [isDone, setIsDone] = useState(false);
 
   const [prevOffset, setPrevOffset] = useState(-10);
 
@@ -23,6 +26,7 @@ const WorkoutProvider = ({ children }) => {
         currentRound,
         currentTarget,
         currentIndex,
+        isDone,
       })
     );
   };
@@ -69,6 +73,7 @@ const WorkoutProvider = ({ children }) => {
       setCurrentRound(state.currentRound);
       setCurrentTarget(state.currentTarget);
       setCurrentTime(state.currentTime);
+      setIsDone(state.isDone);
     } else {
       setCurrentTime(newTimers[0].startTimes[0]);
     }
@@ -78,6 +83,7 @@ const WorkoutProvider = ({ children }) => {
   const start = () => {
     // Avoid duplicate setInterval
     stop();
+    setIsDone(false);
     intervalRef.current = setInterval(() => {
       setCurrentTime((prev) => prev + timers[currentIndex].offset);
     }, 10);
@@ -104,6 +110,7 @@ const WorkoutProvider = ({ children }) => {
       setCurrentIndex((prev) => prev + 1);
       setCurrentTime(timers[currentIndex + 1].startTimes[0]);
     } else {
+      setIsDone(true);
       stop();
       const history = JSON.parse(localStorage.getItem("history")) || [];
       history.push(timers);
@@ -130,11 +137,20 @@ const WorkoutProvider = ({ children }) => {
     setCurrentTarget(0);
     setCurrentRound(1);
     setCurrentIndex(0);
-
+    root.style.setProperty("--progress-deg", `0deg`);
     setCurrentTime(timers[0]?.startTimes[0] || 0);
+    setIsDone(false);
   };
 
   if (intervalRef.current) {
+    root.style.setProperty(
+      "--progress-deg",
+      `${
+        ((currentTime + timers[currentIndex].offset) /
+          timers[currentIndex].targets[currentTarget]) *
+          360 || 0
+      }deg`
+    );
     // Check if offset changed. If yes we restart the interval to update the offset in interval
     if (prevOffset !== timers[currentIndex].offset) {
       setPrevOffset(timers[currentIndex].offset);
@@ -157,6 +173,7 @@ const WorkoutProvider = ({ children }) => {
         toggleRunPause,
         nextTimer,
         reset,
+        isDone,
       }}
     >
       {children}

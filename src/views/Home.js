@@ -11,8 +11,15 @@ import ErrorFallback from "../components/error";
 let didInit = false;
 
 const Home = (props) => {
-  const { timers, setTimers, toggleRunPause, nextTimer, reset, currentTime } =
-    useWorkoutContext();
+  const {
+    timers,
+    setTimers,
+    toggleRunPause,
+    nextTimer,
+    reset,
+    currentTime,
+    isDone,
+  } = useWorkoutContext();
 
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -47,11 +54,16 @@ const Home = (props) => {
         </div>
       )}
       <div>
-        <button onClick={toggleRunPause}>Start/Pause</button>
+        <button
+          onClick={toggleRunPause}
+          disabled={timers.length === 0 || isDone}
+        >
+          Start/Pause
+        </button>
         <button onClick={reset} disabled={timers.length === 0}>
           Reset
         </button>
-        <button onClick={nextTimer} disabled={timers.length === 0}>
+        <button onClick={nextTimer} disabled={timers.length === 0 || isDone}>
           Next
         </button>
       </div>
