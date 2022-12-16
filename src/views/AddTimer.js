@@ -49,6 +49,7 @@ const Timer = () => {
 
     const newTimer = JSON.parse(
       JSON.stringify({
+        id: Date.now(),
         name,
         type: timerType,
         targets,

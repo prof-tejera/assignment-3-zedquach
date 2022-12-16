@@ -38,9 +38,16 @@ const WorkoutProvider = ({ children }) => {
   };
 
   // Remove timer from workout routine
-  const removeTimer = (index) => {
-    const newTimers = [...timers];
-    newTimers.splice(index, 1);
+  const removeTimer = (id) => {
+    const newTimers = [...timers].filter((timer) => timer.id !== id);
+    setTimers(newTimers);
+    reset();
+  };
+
+  const editTimer = (id, newTimer) => {
+    const newTimers = [...timers].map((timer) =>
+      timer.id === id ? newTimer : timer
+    );
     setTimers(newTimers);
     reset();
   };
@@ -146,6 +153,7 @@ const WorkoutProvider = ({ children }) => {
         setTimers: restoreTimers,
         addTimer,
         removeTimer,
+        editTimer,
         toggleRunPause,
         nextTimer,
         reset,

@@ -32,7 +32,7 @@ const Nav = () => {
   const [prevTimers, setPrevTimers] = useState(timers);
 
   // Update url when timers change
-  if (timers !== prevTimers) {
+  if (JSON.stringify(prevTimers) !== JSON.stringify(timers)) {
     encode(JSON.stringify(timers)).then((encodedString) => {
       newRoutineParams.set("routine", encodedString);
       setPrevTimers(timers);

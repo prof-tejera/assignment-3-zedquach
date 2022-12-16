@@ -3,7 +3,7 @@ import RoutineDetail from "./RoutineDetail";
 import styles from "./RoutineList.module.css";
 
 const RoutineList = ({ timersProp, isHistory = false }) => {
-  const { timers: timersContext } = useWorkoutContext();
+  const { timers: timersContext, currentIndex } = useWorkoutContext();
 
   const timers = timersProp || timersContext;
 
@@ -11,10 +11,10 @@ const RoutineList = ({ timersProp, isHistory = false }) => {
     <div className={styles.wrapper}>
       {timers.map((timer, index) => (
         <RoutineDetail
-          {...timer}
-          index={index}
-          key={index}
+          timerProp={timer}
+          key={timer.id}
           isHistory={isHistory}
+          isActive={timers[currentIndex].id === timer.id}
         />
       ))}
     </div>
