@@ -5,6 +5,8 @@ import { decode } from "../lib/hash";
 
 import { useWorkoutContext } from "../context/WorkoutProvider";
 import { useSearchParams } from "react-router-dom";
+import { ErrorBoundary } from "react-error-boundary";
+import ErrorFallback from "../components/error";
 
 let didInit = false;
 
@@ -24,7 +26,9 @@ const Home = (props) => {
 
   return (
     <div className={styles.wrapper}>
-      <RoutineList />
+      <ErrorBoundary FallbackComponent={ErrorFallback}>
+        <RoutineList />
+      </ErrorBoundary>
       {timers.length > 0 && (
         <div>
           Total Time:

@@ -36,7 +36,12 @@ const RoutineDetail = ({ name, type, targets, index, rounds, isHistory }) => {
         )}
         <div>{type.toUpperCase()}</div>
         <div>
-          Rounds: <span>{rounds}</span>
+          Rounds:{" "}
+          {isEdit ? (
+            <input placeholder="rounds"></input>
+          ) : (
+            <span>{rounds}</span>
+          )}
         </div>
       </div>
       <div>
