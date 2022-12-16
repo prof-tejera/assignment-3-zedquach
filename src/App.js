@@ -60,7 +60,7 @@ const Nav = () => {
 const App = () => {
   return (
     <Container>
-      <Router basename="/assignment-2-zedquach">
+      <Router basename="/assignment-3-zedquach">
         <Nav />
         <Routes>
           <Route path="/" element={<Home />}></Route>
